@@ -1,0 +1,29 @@
+{
+  "name": "dlp",
+  "description": "数据加载代理，实现异步数据的缓存控制、打底数据使用等功能",
+  "version": "4.0.0",
+  "keywords": [
+    "mui"
+  ],
+  "screenshot": "http://gtms01.alicdn.com/tps/i1/T1JI8AFH4dXXXP80c_-180-180.jpeg",
+  "feDependencies": {
+  },
+  "kissyVersion": "1.4.14",
+  "devDependencies": {
+    "autod": "2",
+    "colors": "^0.6.2",
+    "del": "^0.1.3",
+    "gulp": "3.x.x",
+    "gulp-code": "~2.3.0",
+    "gulp-if": "*",
+    "gulp-less": "*",
+    "gulp-plumber": "^0.6.5",
+    "gulp-xtpl": "*"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npm.alibaba-inc.com"
+  },
+  "script": {
+    "autod": "autod -w --test=gulpfile.js --prefix=\"~\""
+  }
+}

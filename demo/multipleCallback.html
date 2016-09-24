@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>允许多次回调</title>
+    <script language="javascript" src="//g.tbcdn.cn/??mui/feloader/4.0.8/feloader-min.js,mui/dlp/4.0.0/seed.js,mui/fetch/4.1.1/seed.js"></script>
+</head>
+<body>
+<p>允许多次回调,这样可以实现在数据未加载完成的时候先使用本地或备用数据，而在数据加载成功之后再次回调（需要回调函数支持）</p>
+</body>
+</html>
+<script language="javascript">
+    require(['mui/dlp/'], function (DLP) {
+        DLP.jsonp({
+            url:"//act.mei.tmall.com/go/rgn/mei/shemei16.php",
+            localCacheType:"localStorage",
+            cacheDelayTime: 64,//100毫秒未请求成功，则使用本地数据
+            multipleCallback: true,//允许指定多次回调，这样在远程数据加载成功之后，还会使用远程数据再次回调
+            error: function (result, textStatus, cbInfo) {
+                document.body.innerHTML += "<br/>" + ["error", textStatus, , JSON.stringify(cbInfo)].join("-")
+            },
+            success: function (result, textStatus, cbInfo) {
+                document.body.innerHTML += "<br/>" + ["success", textStatus, , JSON.stringify(cbInfo)].join("-")
+            },
+            complete: function (result, textStatus, cbInfo) {
+                document.body.innerHTML += "<br/>" + ["complete", textStatus, , JSON.stringify(cbInfo)].join("-")
+            }
+        });
+    });
+</script>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>请求ald数据</title>
+    <script language="javascript" src="//g.tbcdn.cn/??mui/feloader/4.0.8/feloader-min.js,mui/dlp/4.0.0/seed.js,mui/fetch/4.1.1/seed.js"></script>
+</head>
+<body>
+<p>请求ald数据，实现备用数据的功能，在请求失败的时候自动去加载备用数据</p>
+</body>
+</html>
+<script language="javascript">
+    require(['mui/dlp/'], function (DLP) {
+        DLP.ald({
+            url:"https://ald.taobao.com/recommend.htm?appId=03600",
+            localCacheType:"localStorage",
+            cacheDelayTime: 64,//100毫秒未请求成功，则使用本地数据
+            multipleCallback: true,//允许指定多次回调，这样在远程数据加载成功之后，还会使用远程数据再次回调，需要回调函数支持
+            backup: {
+                jsonpCallback:'__ALADDIN_03600_CB',
+                url: 'https://tmall-rmc.alicdn.com/ALADDIN/03600/data.js'
+            },
+            error: function (result, textStatus, cbInfo) {
+                document.body.innerHTML += "<br/>" + ["error", textStatus, , JSON.stringify(cbInfo)].join("-")
+            },
+            success: function (result, textStatus, cbInfo) {
+                document.body.innerHTML += "<br/>" + ["success", textStatus, , JSON.stringify(cbInfo)].join("-")
+            },
+            complete: function (result, textStatus, cbInfo) {
+                document.body.innerHTML += "<br/>" + ["complete", textStatus, , JSON.stringify(cbInfo)].join("-")
+            }
+        });
+    });
+</script>

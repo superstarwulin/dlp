@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>更改缓存有效时间</title>
+    <script language="javascript" src="//g.tbcdn.cn/??mui/feloader/4.0.8/feloader-min.js,mui/dlp/4.0.0/seed.js,mui/fetch/4.1.1/seed.js"></script>
+</head>
+<body>
+<p>更改缓存有效时间，在此时间范围内，不用向服务器请求数据</p>
+</body>
+</html>
+<script language="javascript">
+    require(['mui/dlp/'], function (DLP) {
+        DLP.jsonp({
+            url:"//act.mei.tmall.com/go/rgn/mei/shemei16.php",
+            localCacheType:"localStorage",
+            cacheValidTime: 5 * 60 * 1000,//5分钟内不重新请求服务器
+            error: function (result, textStatus, cbInfo) {
+                document.body.innerHTML += "<br/>" + ["error", textStatus, , JSON.stringify(cbInfo)].join("-")
+            },
+            success: function (result, textStatus, cbInfo) {
+                document.body.innerHTML += "<br/>" + ["success", textStatus, , JSON.stringify(cbInfo)].join("-")
+            },
+            complete: function (result, textStatus, cbInfo) {
+                document.body.innerHTML += "<br/>" + ["complete", textStatus, , JSON.stringify(cbInfo)].join("-")
+            }
+        });
+    });
+</script>
